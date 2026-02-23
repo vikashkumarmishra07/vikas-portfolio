@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #0b1120);
+            color: white;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout {
+            color: #8b5cf6;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .logout:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
+        }
+
+        .analytics {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .message {
+            background: #334155;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            margin-right: 5px;
+            color: white;
+        }
+
+        .read-btn {
+            background: #22c55e;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        hr {
+            border: 1px solid #334155;
+        }
+
+        @media(max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Welcome {{ request.user.username }}</h2>
+
+    <!-- Secure Logout (POST method) -->
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout">Logout</button>
+    </form>
+</div>
+
+<hr>
+
+<div class="card">
+    <div class="analytics">
+        Total Messages: {{ total_messages }}
+    </div>
+</div>
+
+{% for msg in messages %}
+<div class="card">
+    <div class="message">
+        <p><strong>Name:</strong> {{ msg.name }}</p>
+        <p><strong>Email:</strong> {{ msg.email }}</p>
+        <p><strong>Subject:</strong> {{ msg.subject }}</p>
+        <p><strong>Message:</strong> {{ msg.message }}</p>
+        <p><strong>Date:</strong> {{ msg.created_at }}</p>
+
+        <br>
+
+        <a href="{% url 'mark_read' msg.id %}" class="btn read-btn">
+            Mark as Read
+        </a>
+
+        <a href="{% url 'delete_message' msg.id %}" class="btn delete-btn">
+            Delete
+        </a>
+    </div>
+</div>
+{% empty %}
+<div class="card">
+    <p>No messages yet.</p>
+</div>
+{% endfor %}
+
+</body>
+</html>
