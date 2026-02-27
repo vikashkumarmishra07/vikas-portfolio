@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vikash Kumar Mishra | Portfolio</title>
 
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="./css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
@@ -32,7 +31,7 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
 
-    <a href="{% static 'resume/VikashMishra_CV_12314105.pdf' %}" download class="nav-cta">
+    <a href="./resume/VikashMishra_CV_12314105.pdf" download class="nav-cta">
       Download Resume
     </a>
   </nav>
@@ -190,18 +189,19 @@
   <section id="contact" class="fade-in">
     <h2>Get In Touch</h2>
 
-    {% if messages %}
-    {% for message in messages %}
-    <div class="success-message">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
 
-    <form method="POST">
-      {% csrf_token %}
+
+    <!-- Replace YOUR_ACCESS_KEY_HERE with an access key from Web3Forms (https://web3forms.com/) -->
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="text" name="subject" placeholder="Subject" required>
       <textarea name="message" placeholder="Your Message" required></textarea>
+
+      <!-- Optional: Redirect to a thank you page or current page on success -->
+      <!-- <input type="hidden" name="redirect" value="https://yourwebsite.com/#contact"> -->
+
       <button type="submit">Send Message</button>
     </form>
 
@@ -221,7 +221,7 @@
     © 2026 Vikash Kumar Mishra | Open to Internship & Placement
   </footer>
 
-  <script src="{% static 'js/script.js' %}"></script>
+  <script src="./js/script.js"></script>
 </body>
 
 </html>
