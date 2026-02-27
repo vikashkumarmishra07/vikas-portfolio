@@ -6,4 +6,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('read/<int:id>/', views.mark_as_read, name='mark_read'),
     path('delete/<int:id>/', views.delete_message, name='delete_message'),
+    path('signup/', views.signup, name='signup'),
 ]

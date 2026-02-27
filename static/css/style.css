@@ -263,11 +263,48 @@ footer {
 
     nav {
         padding: 15px 5%;
+        flex-wrap: wrap;
+    }
+
+    /* Hamburger Menu Styles */
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: white;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+        gap: 15px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-cta {
+        display: none;
     }
 
     section {
         padding: 80px 5%;
     }
+}
+.hamburger {
+    display: none;
 }
 .contact-link {
     color: #8b5cf6;
